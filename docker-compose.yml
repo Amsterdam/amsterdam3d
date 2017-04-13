@@ -4,6 +4,7 @@ pdal:
     - database:database
   volumes:
     - /mnt/sources3d:/data
+    - $PWD/pipeline:/pipeline
 
 database:
   image: build.datapunt.amsterdam.nl:5000/atlas/pointcloud:latest
