@@ -1,0 +1,7 @@
+pdal:
+  image: pdal/pdal:latest
+  volumes:
+    - /mnt/sources3d:/data
+
+database:
+  image: build.datapunt.amsterdam.nl:5000/atlas/pointcloud:latest
