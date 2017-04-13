@@ -5,3 +5,5 @@ pdal:
 
 database:
   image: build.datapunt.amsterdam.nl:5000/atlas/pointcloud:latest
+  ports:
+    - "5432:5432"
