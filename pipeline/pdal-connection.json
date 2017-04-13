@@ -1,0 +1,21 @@
+{
+  "pipeline":[
+    {
+      "type":"readers.las",
+      "spatialreference":"EPSG:28992"
+    },
+    {
+      "type":"filters.chipper",
+      "capacity":600
+    },
+    {
+      "type":"writers.pgpointcloud",
+      "connection":"host='database' dbname='amsterdam3d' user='amsterdam3d' password='amsterdam3d'",
+      "schema":"adam_pointcloud",
+      "compression":"dimensional",
+      "overwrite":"false",
+      "srid":"28992",
+      "pcid":"8004"
+    }
+  ]
+}
