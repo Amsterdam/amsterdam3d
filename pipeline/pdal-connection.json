@@ -14,8 +14,8 @@
       "schema":"adam_pointcloud",
       "compression":"dimensional",
       "overwrite":"false",
-      "srid":"28992",
-      "pcid":"8004"
+      "srid":"28992" //,
+//      "pcid":"8004"
     }
   ]
 }
