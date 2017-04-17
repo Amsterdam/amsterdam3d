@@ -11,7 +11,7 @@
     {
       "type":"writers.pgpointcloud",
       "connection":"host='database' dbname='amsterdam3d' user='amsterdam3d' password='amsterdam3d'",
-      "schema":"adam_pointcloud",
+      "schema":"ahn3_pointcloud",
       "compression":"dimensional",
       "overwrite":"false",
       "srid":"28992"
