@@ -4,10 +4,10 @@ exec > >(tee output.log)
 exec 2>&1
 MAPNR=$1
 declare -i COUNT
-COUNT=$( ls -l /data/ahn3/*.laz | wc -l )
+COUNT=$( ls -l /data/ahn3/*.LAZ | wc -l )
 i=0
 echo $COUNT
-for file in /data/ahn3/*.laz
+for file in /data/ahn3/*.LAZ
 do
   echo 'Next file: '
   echo $file
