@@ -10,7 +10,7 @@
     },
     {
       "type":"writers.pgpointcloud",
-      "connection":"host='database' dbname='amsterdam3d' user='amsterdam3d' password='amsterdam3d'",
+      "connection":"host='database' dbname='ahn3' user='amsterdam3d' password='amsterdam3d'",
       "schema":"ahn3_pointcloud",
       "compression":"dimensional",
       "overwrite":"false",
