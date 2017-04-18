@@ -4,14 +4,14 @@ exec > >(tee output.log)
 exec 2>&1
 MAPNR=$1
 declare -i COUNT
-COUNT=$( ls -l /data/ahn3/*.LAZ | wc -l )
+COUNT=$( ls -l /data/*.laz | wc -l )
 i=0
 echo $COUNT
-for file in /data/ahn3/*.LAZ
+for file in /data/*.laz
 do
   echo 'Next file: '
   echo $file
-  pdal pipeline --debug /pipeline/pdal-connection_ahn3.json --readers.las.filename=$file --writers.pgpointcloud.table=patches
+  pdal pipeline --debug /pipeline/pdal-connection_ahn3.json --readers.las.filename=$file
   let  "COUNT -= 1"
   let "i += 1"
   echo '##### ' $i ' bestanden gedaan, nog' $COUNT 'te gaan.... #####'
