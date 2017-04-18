@@ -11,7 +11,7 @@ for file in /data/*.laz
 do
   echo 'Next file: '
   echo $file
-  pdal pipeline --debug /pipeline/pdal-connection_ahn3.json--readers.las.filename=$file --writers.pgpointcloud.table=patches
+  pdal pipeline --debug /pipeline/pdal-connection_ahn3.json --readers.las.filename=$file --writers.pgpointcloud.table=patches
   let  "COUNT -= 1"
   let "i += 1"
   echo '##### ' $i ' bestanden gedaan, nog' $COUNT 'te gaan.... #####'
