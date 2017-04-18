@@ -114,5 +114,11 @@ RUN apt-get update \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN apt-get update \
+	&& apt-get install -y \
+		sqllite3 \
+ 	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ENV PATH="/temp/3dfier/build:${PATH}"
 WORKDIR /temp/3dfier/example_data
