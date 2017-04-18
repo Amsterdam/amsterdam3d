@@ -113,3 +113,5 @@ RUN apt-get update \
 		npm \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+WORKDIR /temp/3dfier/example_data
