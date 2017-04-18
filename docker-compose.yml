@@ -1,27 +1,27 @@
-#version: '2.1'
-#
-#services:
-database:
-  image: build.datapunt.amsterdam.nl:5000/atlas/pointcloud:latest
-  ports:
-    - "5432:5432"
-  volumes:
-    - /mnt/data3d/data:/var/lib/postgresql/data
+version: "2.1"
 
-pdal:
-  image: pdal/pdal:latest
-  links:
-    - database:database
-  volumes:
-    - /mnt/sources3d:/data
-    - $PWD/pipeline:/pipeline
+services:
+  database:
+    image: build.datapunt.amsterdam.nl:5000/atlas/pointcloud:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - /mnt/data3d/data:/var/lib/postgresql/data
 
-3dfier:
-  build: 3dfier
+  pdal:
+    image: pdal/pdal:latest
+    links:
+      - database:database
+    volumes:
+      - /mnt/sources3d:/data
+      - $PWD/pipeline:/pipeline
 
-#  demo:
-#    build: demo
-#    extra_hosts:
-#      - "localhost:10.62.84.123"
-#    ports:
-#      - "8081:8081"
+  3dfier:
+    build: 3dfier
+
+  demo:
+    build: demo
+    links:
+      - database:database
+    ports:
+      - "8081:8081"

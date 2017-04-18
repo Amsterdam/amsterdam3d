@@ -59,8 +59,8 @@ app.get( '/bgt3d', function( req, res ) {
 			user : 'amsterdam3d',
 			password : 'amsterdam3d',
 			database : 'amsterdam3d',
-			host : 'localhost',
-			port : 5455
+			host : 'database',
+			port : 5432
 		} );
 
 		var querystring = fs.readFileSync( sets [ set ].file ).toString( );
