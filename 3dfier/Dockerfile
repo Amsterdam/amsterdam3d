@@ -103,9 +103,9 @@ RUN cmake .. -DLIBLAS_LIBRARY=/usr/local/lib/liblas.so
 WORKDIR /temp/3dfier/build
 RUN make -j 4
 
-WORKDIR /temp/
-RUN rm -rf /temp/3dfier
-
+#WORKDIR /temp/
+#RUN rm -rf /temp/3dfier
+#
 # Prepare for piplinescripts
 RUN apt-get update \
 	&& apt-get install -y \
