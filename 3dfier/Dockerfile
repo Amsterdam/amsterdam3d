@@ -7,6 +7,7 @@ RUN apt-get update \
 		wget \
 		git \
 		build-essential \
+		libsqlite3-dev \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -54,6 +55,12 @@ RUN make install
 WORKDIR /temp
 RUN rm -rf /temp/laszip-src-2.2.0
 
+WORKDIR /usr/local/include
+RUN mkdir laszip
+
+WORKDIR /usr/local/include/laszip
+RUN ln -s ../laszip.hpp laszip.hpp
+
 WORKDIR /temp
 RUN wget http://download.osgeo.org/liblas/libLAS-1.8.1.tar.bz2
 RUN tar -xvf libLAS-1.8.1.tar.bz2
@@ -61,9 +68,8 @@ RUN tar -xvf libLAS-1.8.1.tar.bz2
 WORKDIR /temp/libLAS-1.8.1
 RUN mkdir build
 
-# Twice, according to readme.md
 WORKDIR /temp/libLAS-1.8.1/build
-RUN cmake -G "Unix Makefiles" ..
+RUN cmake -G "Unix Makefiles" -DWITH_LASZIP=true -DLASZIP_INCLUDE_DIR=/usr/local/include ..
 
 WORKDIR /temp/libLAS-1.8.1/build
 RUN make -j 4
@@ -108,8 +114,8 @@ RUN mkdir /output
 RUN cp 3dfier /work
 RUN mv /temp/3dfier/example_data/* /work
 
-WORKDIR /temp/
-RUN rm -rf /temp/3dfier
+#WORKDIR /temp/
+#RUN rm -rf /temp/3dfier
 
 # Prepare for piplinescripts
 RUN apt-get update \
