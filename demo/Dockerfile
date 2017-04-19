@@ -5,27 +5,9 @@ MAINTAINER datapunt.ois@amsterdam.nl
 RUN apt-get update \
 	&& apt-get install -y \
 		nodejs \
+		nodejs-legacy \
 		git \
 		npm \
- 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-WORKDIR /temp
-RUN git clone https://github.com/AnalyticalGraphicsInc/cesium
-
-WORKDIR /temp/cesium
-RUN git checkout 3d-tiles
-
-WORKDIR /temp/cesium
-RUN npm install
-RUN npm run combineRelease
-
-# /var/www/html/
-
-# Install viewer scripts
-RUN apt-get update \
-	&& apt-get install -y \
-		nodejs-legacy \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -36,6 +18,7 @@ RUN git clone https://github.com/Geodan/x3d_services.git
 
 WORKDIR /services/x3d_services
 RUN npm install
+COPY app/amsterdam* /services/x3d_services/js/
 
 RUN mkdir /app
 
@@ -45,7 +28,7 @@ RUN git clone https://github.com/Geodan/x3d_viewer.git
 WORKDIR /app/x3d_viewer
 RUN npm install -g bower
 RUN bower install --allow-root
-COPY app/amsterdam* /services/x3d_services/js/
+RUN ln -s . /var/www/html/x3d
 
 EXPOSE 80
 
