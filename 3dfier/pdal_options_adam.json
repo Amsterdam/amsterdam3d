@@ -1,0 +1,15 @@
+{
+  "pipeline":[
+    {
+      "type":"readers.pgpointcloud",
+      "connection":"dbname='amsterdam3d' user='postgres'",
+      "schema":"adam_pointcloud",
+      "table":"patches",
+      "column":"pa",
+      "spatialreference":"EPSG:28992"
+    },{
+      "type":"writers.las",
+      "a_srs":"EPSG:28992"
+    }
+  ]
+}
