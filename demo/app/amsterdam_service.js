@@ -11,7 +11,7 @@ var sets = {
 	// rwspoints: { file: '../sql/rws_points.sql',sql: ''},
 	// kade: { file: '../sql/bgt_kade.sql',sql: ''},
 	// steiger: { file: '../sql/bgt_steiger.sql',sql: ''},
-	water: { file: '../sql/bgt_water.sql',sql: ''},
+	water: { file: 'sql/bgt_water.sql',sql: ''},
 	// bridge: { file: '../sql/bgt_bridge.sql',sql: ''},
 	// bridgepilons: { file: '../sql/bgt_bridgepilons.sql',sql: ''},
 	// scheiding: { file : '../sql/bgt_scheiding.sql',sql: ''},
