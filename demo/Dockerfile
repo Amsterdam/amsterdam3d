@@ -20,7 +20,8 @@ WORKDIR /services/x3d_services
 RUN npm install
 COPY app/amsterdam* /services/x3d_services/js/
 
-RUN npm install forever
+RUN npm install -g forever
+
 RUN forever start amsterdam_service.js
 RUN forever start amsterdam_ahn3_service.js
 
