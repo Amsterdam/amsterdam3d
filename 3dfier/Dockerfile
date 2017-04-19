@@ -106,7 +106,7 @@ RUN make -j 4
 RUN mkdir /work
 RUN mkdir /output
 RUN cp 3dfier /work
-RUN cp ../example_data /work
+RUN mv /temp/3dfier/example_data/* /work
 
 WORKDIR /temp/
 RUN rm -rf /temp/3dfier
