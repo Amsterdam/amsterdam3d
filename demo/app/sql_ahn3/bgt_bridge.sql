@@ -9,7 +9,7 @@ pointcloud AS (
 ),
 --TODO: introduce extra vertices where brdge pilon intersects
 footprints AS (
-	SELECT nextval('counter') id, ogc_fid fid, 'bridge'::text AS class, 'dek'::text AS type,
+	SELECT nextval('counter') id, 'bridge'::text AS class, 'dek'::text AS type,
 	  ST_CurveToLine(a.geometrie) geom
 	FROM imgeo.bgt_overbruggingsdeel a, bounds b
 	WHERE 1 = 1
@@ -18,7 +18,7 @@ footprints AS (
 	AND ST_Intersects(ST_Centroid(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)), b.geom)
 )
 ,roads AS (
-	SELECT nextval('counter') id,a.ogc_fid, 'bridge'::text AS class, a.bgt_functie as type,
+	SELECT nextval('counter') id, 'bridge'::text AS class, a.bgt_functie as type,
 		a.geometrie geom
 	FROM imgeo.bgt_wegdeel a
 	LEFT JOIN imgeo.bgt_overbruggingsdeel b
@@ -39,15 +39,15 @@ footprints AS (
 	WHERE ST_GeometryType(geom) = 'ST_Polygon'
 )
 ,rings AS (
-	SELECT id, fid, type, geom as geom0, (ST_DumpRings(geom)).*
+	SELECT id, type, geom as geom0, (ST_DumpRings(geom)).*
 	FROM polygons
 )
 ,edge_points AS (
-	SELECT id, fid, type, geom0, path ring, (ST_Dumppoints(geom)).*
+	SELECT id, type, geom0, path ring, (ST_Dumppoints(geom)).*
 	FROM rings
 )
 ,edge_points_patch AS ( --get closest patch to every vertex
-	SELECT a.id, a.fid, a.type, a.geom0, a.path, a.ring, a.geom,  --find closes patch to point
+	SELECT a.id, a.type, a.geom0, a.path, a.ring, a.geom,  --find closes patch to point
 	PC_Explode(COALESCE(b.pa, --if not intersection, then get the closest one
 		(
 		SELECT b.pa FROM pointcloud b
@@ -60,32 +60,32 @@ footprints AS (
 ),
 emptyz AS (
 	SELECT
-		a.id, a.fid, a.type, a.path, a.ring, a.geom,
+		a.id, a.type, a.path, a.ring, a.geom,
 		PC_Patch(pt) pa,
 		PC_PatchMin(PC_Patch(pt), 'z') min,
 		PC_PatchMax(PC_Patch(pt), 'z') max,
 		PC_PatchAvg(PC_Patch(pt), 'z') avg
 	FROM edge_points_patch a
 	WHERE ST_Intersects(geom0, Geometry(pt))
-	GROUP BY a.id, a.fid, a.type, a.path, a.ring, a.geom
+	GROUP BY a.id, a.type, a.path, a.ring, a.geom
 )
 ,filter AS (
 	SELECT
-		a.id, a.fid, a.type, a.path, a.ring, a.geom,
+		a.id, a.type, a.path, a.ring, a.geom,
 		PC_Get(PC_Explode(PC_FilterBetween(pa, 'z',avg-0.2, avg+0.2)),'z') z
 	FROM emptyz a
 )
 -- assign z-value for every boundary point
 ,filledz AS (
-	SELECT id, fid, type, path, ring, ST_Translate(St_Force3D(geom), 0,0,avg(z)) geom
+	SELECT id, type, path, ring, ST_Translate(St_Force3D(geom), 0,0,avg(z)) geom
 	FROM filter
-	GROUP BY id, fid, type, path, ring, geom
+	GROUP BY id, type, path, ring, geom
 	ORDER BY id, ring, path
 )
 ,allrings AS (
-	SELECT id, fid, type, ring, ST_AddPoint(ST_MakeLine(geom), First(geom)) geom
+	SELECT id, type, ring, ST_AddPoint(ST_MakeLine(geom), First(geom)) geom
 	FROM filledz
-	GROUP BY id,fid, type, ring
+	GROUP BY id,type, ring
 )
 ,outerrings AS (
 	SELECT *
@@ -93,13 +93,13 @@ emptyz AS (
 	WHERE ring[1] = 0
 )
 ,innerrings AS (
-	SELECT id, fid, type, St_Accum(geom) arr
+	SELECT id, type, St_Accum(geom) arr
 	FROM allrings
 	WHERE ring[1] > 0
-	GROUP BY id, fid, type
+	GROUP BY id, type
 ),
 polygonsz AS (
-	SELECT a.id, a.fid, a.type, COALESCE(ST_MakePolygon(a.geom, b.arr),ST_MakePolygon(a.geom)) geom
+	SELECT a.id, a.type, COALESCE(ST_MakePolygon(a.geom, b.arr),ST_MakePolygon(a.geom)) geom
 	FROM outerrings a
 	LEFT JOIN innerrings b ON a.id = b.id
 )
