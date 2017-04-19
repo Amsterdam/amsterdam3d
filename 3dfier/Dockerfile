@@ -103,9 +103,14 @@ RUN cmake .. -DLIBLAS_LIBRARY=/usr/local/lib/liblas.so
 WORKDIR /temp/3dfier/build
 RUN make -j 4
 
-#WORKDIR /temp/
-#RUN rm -rf /temp/3dfier
-#
+RUN mkdir /work
+RUN mkdir /output
+RUN cp 3dfier /work
+RUN cp ../example_data /work
+
+WORKDIR /temp/
+RUN rm -rf /temp/3dfier
+
 # Prepare for piplinescripts
 RUN apt-get update \
 	&& apt-get install -y \
@@ -114,11 +119,5 @@ RUN apt-get update \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN apt-get update \
-	&& apt-get install -y \
-		sqlite3 \
- 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-ENV PATH="/temp/3dfier/build:${PATH}"
-WORKDIR /temp/3dfier/example_data
+ENV PATH="/work:${PATH}"
+WORKDIR /work

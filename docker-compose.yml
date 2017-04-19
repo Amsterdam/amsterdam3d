@@ -18,6 +18,8 @@ services:
 
   3dfier:
     build: 3dfier
+    volumes:
+      - $PWD/output:/output
 
   demo:
     build: demo
