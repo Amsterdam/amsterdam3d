@@ -5,7 +5,7 @@ bounds AS (
 pointcloud_water AS (
 	SELECT PC_FilterEquals(pa,'classification',9) pa
 	FROM ahn3_pointcloud.patches, bounds
-	WHERE PC_Intersects(geom, pa) --patches should be INSIDE bounds
+	WHERE PC_Intersects(geom, pa)
 ),
 polygons AS (
 	SELECT nextval('counter') id, bgt_type as type, 'water'::text AS class,
@@ -23,7 +23,7 @@ polygons AS (
 		0,0,
 		COALESCE(min(
 			PC_PatchMin(
-				PC_FilterEquals(pa,'classification',0)
+				PC_FilterEquals(pa,'classification',9)
 				,'z')
 			)
 		,0)
