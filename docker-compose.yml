@@ -23,6 +23,8 @@ services:
 
   demo:
     build: demo
+    volumes:
+      - $PWD/demo/app:/services/x3d_services/js
     links:
       - database:database
     ports:
