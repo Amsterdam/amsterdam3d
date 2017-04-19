@@ -10,6 +10,9 @@ RUN apt-get update \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+WORKDIR /temp
+RUN git clone https://github.com/AnalyticalGraphicsInc/cesium
+
 WORKDIR /temp/cesium
 RUN git checkout 3d-tiles
 
@@ -25,7 +28,7 @@ RUN apt-get update \
 		nodejs-legacy \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-	
+
 RUN mkdir /services
 
 WORKDIR /services
@@ -43,9 +46,6 @@ WORKDIR /app/x3d_viewer
 RUN npm install -g bower
 RUN bower install --allow-root
 COPY app/amsterdam* /services/x3d_services/js/
-
-WORKDIR /temp
-RUN git clone https://github.com/AnalyticalGraphicsInc/cesium
 
 EXPOSE 80
 
