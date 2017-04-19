@@ -56,9 +56,9 @@ app.get( '/bgt3d_ahn3', function( req, res ) {
 	}
 	else {
 		var client = new pg.Client( {
-			user : 'amsterdam3d',
-			password : 'amsterdam3d',
-			database : 'amsterdam3d',
+			user : 'postgres',
+			password : ' ',
+			database : 'ahn3',
 			host : 'database',
 			port : 5432
 		} );

@@ -122,6 +122,7 @@ RUN rm -rf /temp/3dfier
 RUN apt-get update \
 	&& apt-get install -y \
 		nodejs \
+		nodejs-legacy \
 		npm \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
