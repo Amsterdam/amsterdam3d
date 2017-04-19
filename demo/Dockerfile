@@ -5,18 +5,27 @@ MAINTAINER datapunt.ois@amsterdam.nl
 RUN apt-get update \
 	&& apt-get install -y \
 		nodejs \
-		nodejs-legacy \
+		git \
 		npm \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+WORKDIR /temp/cesium
+RUN git checkout 3d-tiles
+
+WORKDIR /temp/cesium
+RUN npm install
+RUN npm run combineRelease
+
+# /var/www/html/
+
 # Install viewer scripts
 RUN apt-get update \
 	&& apt-get install -y \
-		git \
+		nodejs-legacy \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+	
 RUN mkdir /services
 
 WORKDIR /services
@@ -37,15 +46,6 @@ COPY app/amsterdam* /services/x3d_services/js/
 
 WORKDIR /temp
 RUN git clone https://github.com/AnalyticalGraphicsInc/cesium
-
-WORKDIR /temp/cesium
-RUN git checkout 3d-tiles
-
-WORKDIR /temp/cesium
-RUN npm install
-RUN npm run combineRelease
-
-# /var/www/html/
 
 EXPOSE 80
 
