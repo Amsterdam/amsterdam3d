@@ -20,11 +20,7 @@ WORKDIR /services/x3d_services
 RUN npm install
 COPY app/amsterdam* /services/x3d_services/js/
 
-RUN npm install -g forever
-
-WORKDIR /services/x3d_services/js
-RUN forever start amsterdam_service.js
-RUN forever start amsterdam_ahn3_service.js
+RUN npm install -g forever-service
 
 RUN mkdir /app
 
@@ -50,4 +46,7 @@ RUN apt-get update \
 COPY default.conf /etc/nginx/conf.d/
 
 WORKDIR /services/x3d_services/js
+RUN forever-service install --start amsterdam_service.js
+RUN forever-service install --start amsterdam_ahn3_service.js
+
 CMD ["nginx", "-g", "daemon off;"]
