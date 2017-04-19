@@ -20,6 +20,7 @@ WORKDIR /services/x3d_services
 RUN npm install
 COPY app/amsterdam* /services/x3d_services/js/
 
+RUN npm install -g forever
 RUN npm install -g forever-service
 
 RUN mkdir /app
