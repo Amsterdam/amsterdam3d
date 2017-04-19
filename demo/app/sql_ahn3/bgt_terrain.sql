@@ -6,12 +6,12 @@ bounds AS (
 plantcover AS (
 	SELECT 'plantcover'::text AS class, bgt_fysiekvoorkomen as type, St_Intersection(geometrie, geom) geom
 	FROM imgeo.bgt_begroeidterreindeel, bounds
-	WHERE ST_Intersects(geom, geometrie) AND ST_GeometryType(geometrie) = 'ST_Polygon'
+	WHERE ST_Intersects(geom, geometrie)
 ),
 bare AS (
 	SELECT 'bare'::text AS class, bgt_fysiekVoorkomen as type, St_Intersection(geometrie, geom) geom
 	FROM imgeo.bgt_onbegroeidterreindeel, bounds
-	WHERE ST_Intersects(geom, geometrie) AND ST_GeometryType(geometrie) = 'ST_Polygon'
+	WHERE ST_Intersects(geom, geometrie)
 ),
 pointcloud_ground AS (
 	SELECT PC_FilterEquals(pa,'classification',2) pa
