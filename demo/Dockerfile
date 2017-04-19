@@ -42,6 +42,7 @@ WORKDIR /temp/cesium
 RUN git checkout 3d-tiles
 
 WORKDIR /temp/cesium
+RUN npm install
 RUN npm run combineRelease
 
 # /var/www/html/
