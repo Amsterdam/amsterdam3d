@@ -47,7 +47,10 @@ RUN apt-get update \
 COPY default.conf /etc/nginx/conf.d/
 
 WORKDIR /services/x3d_services/js
-RUN forever-service install --start amsterdam_service.js
-RUN forever-service install --start amsterdam_ahn3_service.js
+RUN forever-service install adam_pointcloud --script amsterdam_service.js
+RUN forever-service install ahn3_pointcloud --script amsterdam_ahn3_service.js
+
+RUN service adam_pointcloud start
+RUN service ahn3_pointcloud start
 
 CMD ["nginx", "-g", "daemon off;"]
