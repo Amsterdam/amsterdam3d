@@ -37,7 +37,7 @@ for( var s in sets ) {
 };
 app.use( cors( ));
 app.use(compress());
-app.get( '/bgt3d_ahn3', function( req, res ) {
+app.get( '/bgt3d', function( req, res ) {
 	var north = req.query [ 'north' ];
 	var south = req.query [ 'south' ];
 	var west = req.query [ 'west' ];

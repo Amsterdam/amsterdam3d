@@ -53,4 +53,6 @@ RUN forever-service install ahn3_pointcloud --script amsterdam_ahn3_service.js
 RUN service adam_pointcloud start
 RUN service ahn3_pointcloud start
 
+COPY adam_conf.js /app/x3d_viewer/conf/adam_conf.js
+
 CMD ["nginx", "-g", "daemon off;"]
