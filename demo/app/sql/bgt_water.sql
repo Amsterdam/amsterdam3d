@@ -12,7 +12,7 @@ polygons AS (
 	  (ST_Dump(ST_Union(
 		 a.geometrie -- doing intersection later so we can find better average height
 	  ))).geom
-	FROM imgeo.waterdeel_2dactueelbestaand a, bounds b
+	FROM imgeo.bgt_waterdeel a, bounds b
 	WHERE ST_Intersects(a.geometrie, b.geom)
 	GROUP BY bgt_type
 )
