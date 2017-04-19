@@ -55,6 +55,7 @@ RUN make install
 WORKDIR /temp
 RUN rm -rf /temp/laszip-src-2.2.0
 
+# Circumventing https://github.com/libLAS/libLAS/issues/9
 WORKDIR /usr/local/include
 RUN mkdir laszip
 
@@ -114,8 +115,8 @@ RUN mkdir /output
 RUN cp 3dfier /work
 RUN mv /temp/3dfier/example_data/* /work
 
-#WORKDIR /temp/
-#RUN rm -rf /temp/3dfier
+WORKDIR /temp/
+RUN rm -rf /temp/3dfier
 
 # Prepare for piplinescripts
 RUN apt-get update \
