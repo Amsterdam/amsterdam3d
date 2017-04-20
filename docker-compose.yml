@@ -21,7 +21,7 @@ services:
     volumes:
       - $PWD/output:/output
 
-  demo:
+  x3d-service-ahn3:
     build: demo
     volumes:
       - $PWD/demo/app:/services/x3d_services/js
@@ -29,5 +29,20 @@ services:
       - database:database
     ports:
       - "8081:8081"
-      - "8080:8080"
+    command: [service, ahn3_pointcloud, start]
+
+  x3d-viewer:
+    build: demo
+    ports:
       - "80:80"
+    command: ["nginx", "-g", "daemon off;"]
+
+#  x3d-service-adam:
+#    build: demo
+#    volumes:
+#      - $PWD/demo/app:/services/x3d_services/js
+#    links:
+#      - database:database
+#    ports:
+#      - "8080:8080"
+#    command: [service, adam_pointcloud, start]

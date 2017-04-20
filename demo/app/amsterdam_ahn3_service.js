@@ -97,10 +97,6 @@ app.get( '/bgt3d', function( req, res ) {
 				} );
 				res.set( "Content-Type", 'text/plain' );
 				res.send(resultstring);
-				/*
-				 res.set("Content-Type", 'text/javascript'); // i added this to avoid the "Resource interpreted as Script but transferred with MIME type text/html" message
-				 res.send(JSON.stringify({data: result.rows}));
-				 */
 				console.log( 'Sending results', result.rows.length );
 				client.end( );
 			} );
