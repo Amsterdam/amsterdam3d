@@ -1,11 +1,11 @@
 WITH
 bounds AS (
-	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
-)﻿,
+	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
+),
 pointcloud AS (
 	SELECT PC_FilterEquals(pa,'classification',6) pa
 	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, PC_envelope(pa) ,10) --patches should be INSIDE bounds
+	WHERE ST_DWithin(geom, PC_envelope(pa) ,10)
 ),
 footprints AS (
 	SELECT ST_Force3D(ST_GeometryN(ST_SimplifyPreserveTopology(geometrie,0.4),1)) geom,
