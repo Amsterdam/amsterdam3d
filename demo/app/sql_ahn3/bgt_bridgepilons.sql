@@ -2,14 +2,12 @@
  bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
  ),
- ﻿pointcloud_unclassified AS (
-	SELECT PC_FilterEquals(pa,'classification',26) pa --unclassified points
-	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds
- ),
- patches AS (
-	SELECT a.pa FROM pointcloud_unclassified a
- ),
+		pointcloud AS (
+			SELECT PC_FilterEquals(pa,'classification',26) pa --bridge points
+			FROM ahn3_pointcloud.patches, bounds
+			WHERE ST_DWithin(geom, pc_envelope(pa),10)
+		),
+
  footprints AS (
 	SELECT ST_Force3D(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)) geom,
 	a.identificatie_lokaalid id, 'pijler'::text as type
@@ -26,7 +24,7 @@
 		PC_Explode(b.pa) pt,
 		geom
 	FROM footprints a
-	LEFT JOIN patches b ON PC_Intersects(a.geom, b.pa)
+	LEFT JOIN pointcloud b ON PC_Intersects(a.geom, b.pa)
  ),
  papatch AS (
 	SELECT
