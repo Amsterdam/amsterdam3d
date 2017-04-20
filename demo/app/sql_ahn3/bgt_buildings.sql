@@ -2,18 +2,17 @@ WITH
 bounds AS (
 	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
 ),
-pointcloud AS (
+﻿pointcloud AS (
 	SELECT PC_FilterEquals(pa,'classification',6) pa
 	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, Geometry(pa),10) --patches should be INSIDE bounds
+	WHERE ST_DWithin(geom, PC_envelope(pa) ,10) --patches should be INSIDE bounds
 ),
 footprints AS (
 	SELECT ST_Force3D(ST_GeometryN(ST_SimplifyPreserveTopology(geometrie,0.4),1)) geom,
-	a.ogc_fid id,
-	0 bouwjaar
+	a.identificatiebagpnd id,
+    0 bouwjaar
 	FROM imgeo.bgt_pand a, bounds b
 	WHERE 1 = 1
-	--AND a.ogc_fid = 688393 --DEBUG
 	AND ST_Area(a.geometrie) > 5
 	AND ST_Intersects(a.geometrie, b.geom)
 	AND ST_Intersects(ST_Centroid(a.geometrie), b.geom)
@@ -47,8 +46,8 @@ polygons AS (
 			, 0,0,max-min -1)
 		)
 		geom FROM stats_fast
-	--SELECT ST_Tesselate(ST_Translate(footprint,0,0, min + 20)) geom FROM stats_fast
 )
+
 SELECT id,
 --s.type as type,
 'building' as type,
