@@ -1,9 +1,7 @@
-﻿
 WITH
 bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
-
 treelocations AS (
 	SELECT a.*
 	FROM imgeo.imgeo_vegetatieobject a, bounds
@@ -44,9 +42,4 @@ MAX(PC_Get(pt,'z')) - MIN(PC_Get(pt,'z')) as height
 FROM clusters a
 WHERE cid Is Not Null
 GROUP BY cid;
-
-
-
-
-
 
