@@ -29,7 +29,7 @@ services:
       - database:database
     ports:
       - "8081:8081"
-    command: [forever, start, amsterdam_ahn3_service.js]
+    command: [forever, amsterdam_ahn3_service.js]
 
   x3d-viewer:
     build: demo
@@ -45,5 +45,4 @@ services:
       - database:database
     ports:
       - "8080:8080"
-    command: [forever, start, amsterdam_service.js]
-    
+    command: [forever, amsterdam_service.js]
