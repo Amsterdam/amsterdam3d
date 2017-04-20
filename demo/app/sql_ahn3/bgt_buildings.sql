@@ -1,6 +1,5 @@
 WITH
 bounds AS (
-	--SELECT ST_Buffer(ST_Transform(ST_SetSrid(ST_MakePoint(_lon, _lat),4326), 28992),200) geom
 	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
 ),
 pointcloud AS (
@@ -36,7 +35,6 @@ stats_fast AS (
 		bouwjaar,
 		geom footprint
 	FROM footprints
-	--LEFT JOIN ahn_pointcloud.ahn2objects ON (ST_Intersects(geom, geometry(pa)))
 	LEFT JOIN pointcloud ON PC_Intersects(geom, pa)
 	GROUP BY footprints.id, footprint, bouwjaar
 ),
