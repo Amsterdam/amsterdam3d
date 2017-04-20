@@ -21,7 +21,7 @@ var sets = {
 	// roofskeleton: { file : 'sql_ahn3/bgt_roofskeleton.sql', sql : '' },
 	// treepoints: { file : 'sql_ahn3/bgt_treepoints.sql', sql : '' },
 	// treepoints: { file : 'sql_ahn3/ahn3_treepoints.sql', sql : '' },
-	treepoints_ahn3: { file : 'sql_ahn3/bgt_ahn3_treepoints.sql', sql : '' },
+	treepoints: { file : 'sql_ahn3/bgt_ahn3_treepoints.sql', sql : '' },
 	// treepoints_ahn2: { file : 'sql_ahn3/bgt_ahn2_treepoints.sql', sql : '' },
 	// groundpoints: { file: 'sql_ahn3/bgt_groundpoints.sql', sql: '' },
 	// lights: { file : 'sql_ahn3/bgt_lights.sql', sql : '' },
