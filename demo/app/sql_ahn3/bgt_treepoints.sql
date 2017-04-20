@@ -2,11 +2,11 @@ WITH
 bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
-		pointcloud AS (
-			SELECT PC_FilterEquals(pa,'classification',1) pa --bridge points
-			FROM ahn3_pointcloud.patches, bounds
-			WHERE ST_DWithin(geom, pc_envelope(pa),10)
-		),
+ pointcloud AS (
+  SELECT PC_FilterEquals(pa,'classification',1) pa --bridge points
+  FROM ahn3_pointcloud.patches, bounds
+	WHERE ST_DWithin(geom, pc_envelope(pa),10)
+ ),
  points AS (
 	SELECT PC_Explode(pa) pt
 	FROM ﻿pointcloud
