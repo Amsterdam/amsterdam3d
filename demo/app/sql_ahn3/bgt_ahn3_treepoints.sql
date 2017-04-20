@@ -7,16 +7,16 @@ treelocations AS (
 	FROM imgeo.imgeo_vegetatieobject a, bounds
 	WHERE ST_Intersects(geom, geometrie)
 ),
-pointcloud_unclassified AS(
+ pointcloud_unclassified AS(
 	SELECT
 		PC_FilterEquals(pa,'classification',1)
 	 pa
 	FROM ahn3_pointcloud.patches, bounds
 	WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds
-),
-patches AS (
+ ),
+ patches AS (
 	SELECT a.pa FROM pointcloud_unclassified a
-),
+ ),
 points AS (
 	SELECT PC_Explode(pa) pt
 	FROM patches

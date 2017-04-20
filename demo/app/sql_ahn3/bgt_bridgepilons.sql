@@ -7,6 +7,9 @@
 	FROM ahn3_pointcloud.patches, bounds
 	WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds
  ),
+ patches AS (
+	SELECT a.pa FROM pointcloud_unclassified a
+ ),
  footprints AS (
 	SELECT ST_Force3D(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)) geom,
 	a.identificatie_lokaalid id, 'pijler'::text as type
@@ -23,7 +26,7 @@
 		PC_Explode(b.pa) pt,
 		geom
 	FROM footprints a
-	LEFT JOIN pointcloud_unclassified b ON PC_Intersects(a.geom, b.pa)
+	LEFT JOIN patches b ON PC_Intersects(a.geom, b.pa)
  ),
  papatch AS (
 	SELECT
