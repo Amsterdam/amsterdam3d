@@ -1,20 +1,20 @@
 WITH
 bounds AS (
-	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
+	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
-pointcloud_building AS (
+﻿pointcloud_building AS (
 	SELECT PC_FilterGreaterThan(
 			PC_FilterEquals(
 				PC_FilterEquals(pa,'classification',1),
 			'NumberOfReturns',1),
 		'Intensity',150) pa  --take out trees with nreturns ands intensity
 	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, Geometry(pa),10) --patches should be INSIDE bounds
+	WHERE ST_DWithin(geom, PC_envelope(pa),10) --patches should be INSIDE bounds
 ),
 footprints AS (
-	SELECT a.ogc_fid id, a.ogc_fid, 'border' AS class, a.bgt_type as type,
+	SELECT a.identificatie_lokaalid id, 'border' AS class, a.bgt_type as type,
 	ST_Force3D(ST_CurveToLine(a.geometrie)) geom
-	FROM imgeo.scheiding a
+	FROM imgeo.imgeo_scheiding a
 	LEFT JOIN imgeo.bgt_overbruggingsdeel b
 	ON St_Intersects((a.geometrie), (b.geometrie)) AND St_Contains(ST_buffer((b.geometrie),1), (a.geometrie))
 	,bounds c
@@ -67,3 +67,4 @@ polygons AS (
 )
 SELECT id,'building' as type, '0.66 0.37 0.13' as color, ST_AsX3D(polygons.geom) geom
 FROM polygons
+
