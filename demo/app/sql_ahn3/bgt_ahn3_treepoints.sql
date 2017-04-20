@@ -1,7 +1,9 @@
-﻿WITH
+﻿
+WITH
 bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
+
 treelocations AS (
 	SELECT a.*
 	FROM imgeo.imgeo_vegetatieobject a, bounds
@@ -16,7 +18,6 @@ pointcloud_unclassified AS(
 ),
 patches AS (
 	SELECT a.pa FROM pointcloud_unclassified a
-
 ),
 points AS (
 	SELECT PC_Explode(pa) pt
