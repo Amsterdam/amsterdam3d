@@ -29,7 +29,7 @@ services:
       - database:database
     ports:
       - "8081:8081"
-    command: [service, ahn3_pointcloud, start]
+    command: [forever, start, ahn3_pointcloud]
 
   x3d-viewer:
     build: demo
@@ -45,4 +45,4 @@ services:
 #      - database:database
 #    ports:
 #      - "8080:8080"
-#    command: [service, adam_pointcloud, start]
+#    command: [forever, start, adam_pointcloud]
