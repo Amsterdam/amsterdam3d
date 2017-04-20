@@ -2,11 +2,11 @@ WITH
 bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
-﻿pointcloud_unclassified AS(
+pointcloud_unclassified AS(
 	SELECT
 		PC_FilterEquals(pa,'classification',1)
 	 pa
-	FROM ahn3_pointcloud.patches, bounds
+	FROM ahn3_pointcloud.vw_ahn3, bounds
 	WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds
 ),
 patches AS (
