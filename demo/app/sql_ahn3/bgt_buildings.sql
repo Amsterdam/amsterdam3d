@@ -1,8 +1,8 @@
 WITH
 bounds AS (
 	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
-),
-﻿pointcloud AS (
+)﻿,
+pointcloud AS (
 	SELECT PC_FilterEquals(pa,'classification',6) pa
 	FROM ahn3_pointcloud.patches, bounds
 	WHERE ST_DWithin(geom, PC_envelope(pa) ,10) --patches should be INSIDE bounds
@@ -47,7 +47,6 @@ polygons AS (
 		)
 		geom FROM stats_fast
 )
-
 SELECT id,
 --s.type as type,
 'building' as type,
