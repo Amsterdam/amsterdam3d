@@ -29,7 +29,7 @@ points_filtered AS (
 	AND PC_Get(pt,'Intensity') < 150
 )
 ,clusters As (
-	SELECT ogc_fid, geom, pt,
+	SELECT id, geom, pt,
 	ST_ClusterDBScan(geom, eps := _eps, minpoints := _minpoints) over () AS cid
 	FROM points_filtered a
 )
