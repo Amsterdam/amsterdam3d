@@ -7,9 +7,9 @@ bounds AS (
   FROM ahn3_pointcloud.patches, bounds
   WHERE ST_DWithin(geom, pc_envelope(pa),10)
  ),
-﻿ points AS (
-  SELECT PC_Explode(pa) pt
-  FROM pointcloud
+   points AS (
+     SELECT PC_Explode(pa) pt
+     FROM pointcloud
  ),
  points_filtered AS (
   SELECT * FROM points
