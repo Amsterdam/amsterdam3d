@@ -1,18 +1,18 @@
 WITH
 bounds AS (
-	SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
+	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
 ),
-pointcloud_unclassified AS (
+﻿pointcloud_unclassified AS (
 	SELECT PC_FilterEquals(pa,'classification',26) pa --unclassified points
 	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, Geometry(pa),10) --patches should be INSIDE bounds
+	WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds
 ),
 footprints AS (
 	SELECT ST_Force3D(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)) geom,
-	a.ogc_fid id, 'pijler'::text as type
+	a.identificatie_lokaalid id, 'pijler'::text as type
 	FROM imgeo.bgt_overbruggingsdeel a, bounds b
 	WHERE 1 = 1
-	AND typeoverbruggingsdeel = 'pijler'
+	AND plus_type = 'pijler'
 	AND ST_Intersects(ST_SetSrid(ST_CurveToLine(a.geometrie),28992), b.geom)
 	AND ST_Intersects(ST_Centroid(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)), b.geom)
 ),
@@ -23,7 +23,7 @@ papoints AS ( --get points from intersecting patches
 		PC_Explode(b.pa) pt,
 		geom
 	FROM footprints a
-	LEFT JOIN pointcloud_unclassified b ON PC_Intersects(a.geom, b.pa))
+	LEFT JOIN pointcloud_unclassified b ON PC_Intersects(a.geom, b.pa)
 ),
 papatch AS (
 	SELECT
@@ -62,3 +62,4 @@ polygons AS (
 )
 SELECT id, type, '0.66 0.37 0.13' as color, ST_AsX3D(polygons.geom) geom
 FROM polygons;
+
