@@ -2,15 +2,17 @@
  bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
  ),
- ﻿pointcloud_ground AS (
+
+ 		pointcloud AS (
 	SELECT PC_FilterGreaterThan(
 			PC_FilterEquals(
 				PC_FilterEquals(pa,'classification',1),
 			'NumberOfReturns',1),
 		'Intensity',150) pa --unclassified points
-	FROM ahn3_pointcloud.patches, bounds
-	WHERE ST_DWithin(geom, pc_envelope(pa),10)
- ),
+			FROM ahn3_pointcloud.patches, bounds
+			WHERE ST_DWithin(geom, pc_envelope(pa),10)
+		),
+
  pointcloud_all AS (
 	SELECT pa pa --all points
 	FROM ahn3_pointcloud.patches, bounds
@@ -30,7 +32,7 @@
 		PC_Explode(b.pa) pt,
 		geom footprint
 	FROM footprints a
-	LEFT JOIN pointcloud_ground b ON PC_Intersects(a.geom, b.pa)
+	LEFT JOIN pointcloud b ON PC_Intersects(a.geom, b.pa)
  ),
  footprintpatch AS ( --get only points that fall inside building, patch them
 	SELECT id, PC_Patch(pt) pa, footprint

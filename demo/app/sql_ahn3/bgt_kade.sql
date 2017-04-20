@@ -1,8 +1,10 @@
+
  WITH
  bounds AS (
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
- )
- ﻿,kades AS (
+ ),
+
+ kades AS (
 	SELECT identificatie_lokaalid fid, 'kade'::text AS class, 'kade'::text as type, St_Intersection(geometrie, geom) geom
 	FROM imgeo.imgeo_scheiding, bounds
 	WHERE (bgt_type = 'kademuur') AND ST_Intersects(geom, geometrie) AND ST_GeometryType(geometrie) = 'ST_Polygon'
