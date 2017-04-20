@@ -29,7 +29,7 @@ services:
       - database:database
     ports:
       - "8081:8081"
-    command: [forever, start, ahn3_pointcloud]
+    command: [forever, start, amsterdam_ahn3_service.js]
 
   x3d-viewer:
     build: demo
@@ -37,12 +37,13 @@ services:
       - "80:80"
     command: ["nginx", "-g", "daemon off;"]
 
-#  x3d-service-adam:
-#    build: demo
-#    volumes:
-#      - $PWD/demo/app:/services/x3d_services/js
-#    links:
-#      - database:database
-#    ports:
-#      - "8080:8080"
-#    command: [forever, start, adam_pointcloud]
+  x3d-service-adam:
+    build: demo
+    volumes:
+      - $PWD/demo/app:/services/x3d_services/js
+    links:
+      - database:database
+    ports:
+      - "8080:8080"
+    command: [forever, start, amsterdam_service.js]
+    

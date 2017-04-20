@@ -43,6 +43,8 @@ RUN apt-get update \
 
 COPY default.conf /etc/nginx/conf.d/
 
+COPY adam_conf.js /app/x3d_viewer/conf/adam_conf.js
+
 RUN npm install -g forever
 
-COPY adam_conf.js /app/x3d_viewer/conf/adam_conf.js
+WORKDIR /services/x3d_services/js
