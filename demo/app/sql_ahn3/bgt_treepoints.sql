@@ -4,7 +4,7 @@
 	SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
  ),
 ﻿
-pointcloud AS(
+ pointcloud AS(
 	SELECT
 		PC_FilterEquals(pa,'classification',1)
 	 pa
