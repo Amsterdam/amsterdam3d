@@ -14,6 +14,12 @@
       "schema":"ahn3_pointcloud",
       "compression":"dimensional",
       "overwrite":"false",
+      "scale_x":"0.01",
+      "scale_y":"0.01",
+      "scale_z":"0.01",
+      "offset_x":"0",
+      "offset_y":"300000",
+      "offset_z":"auto",
       "srid":"28992"
     }
   ]
