@@ -31,7 +31,7 @@ footprints AS (
   AND ST_Intersects(c.geom, a.geometrie)
   AND ST_Intersects(ST_Centroid(ST_SetSrid(ST_CurveToLine(a.geometrie),28992)), c.geom)
 )
-﻿,multipolygons AS (
+,multipolygons AS (
 SELECT id, class, type, ST_GeometryN(geom, generate_series(1, ST_NumGeometries(geom))) AS geom
 FROM footprints
   WHERE ST_GeometryType(geom) = 'ST_MultiPolygon'
