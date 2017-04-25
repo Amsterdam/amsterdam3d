@@ -92,7 +92,12 @@ app.get( '/bgt3d', function( req, res ) {
 				resultstring += "\n";
 				result.rows.forEach( function( row ) {
 					for (var key in row){
-						resultstring += row[key] + ','
+						//  Work-around for ST_ToX3D bug
+						var value = row[key];
+						if (value.startsWith( "<Shape>" )) {
+							value = value.substring(7);
+						}
+						resultstring += value + ',';
 					}
 					resultstring += '\n';
 				} );
