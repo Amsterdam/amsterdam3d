@@ -93,8 +93,8 @@ app.get( '/bgt3d', function( req, res ) {
 				result.rows.forEach( function( row ) {
 					for (var key in row){
 						//  Work-around for ST_ToX3D bug
-						var value = ''+row[key];
-						if (value.startsWith( "<Shape>" )) {
+						var value = row[key].toString();
+						if (value.indexOf( "<Shape>" ) === 0) {
 							value = value.substring(7);
 						}
 						resultstring += value + ',';
