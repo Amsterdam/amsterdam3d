@@ -15,6 +15,7 @@
       "compression":"dimensional",
       "overwrite":"false",
       "srid":"28992",
+      "output_dims":"X, Y, Z, Intensity, ReturnNumber, NumberOfReturns, ScanDirectionFlag, EdgeOfFlightLine, Classification, ScanAngleRank, UserData, PointSourceId, GpsTime",
       "pcid":"2"
     }
   ]
