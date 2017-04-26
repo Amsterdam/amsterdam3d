@@ -7,7 +7,7 @@
  kades AS (
   SELECT identificatie_lokaalid fid, 'kade'::text AS class, 'kade'::text as type, St_Intersection(geometrie, geom) geom
   FROM imgeo.imgeo_scheiding, bounds
-  WHERE (bgt_type = 'kademuur') AND ST_Intersects(geom, geometrie) AND ST_GeometryType(geometrie) = 'ST_Polygon'
+  WHERE (bgt_type = 'kademuur') AND ST_Intersects(geom, geometrie) -- AND ST_GeometryType(geometrie) = 'ST_Polygon'
  )
  ,pointcloud_ground AS (
   SELECT PC_FilterEquals(pa,'classification',2) pa --ground points
