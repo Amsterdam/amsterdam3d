@@ -4,7 +4,7 @@ bounds AS (
 ),
 pointcloud_unclassified AS(
   SELECT
-    PC_FilterEquals(pa,'classification',1)
+    PC_FilterEquals(pa,'classification',0)
    pa
   FROM adam_pointcloud.patches, bounds
   WHERE ST_DWithin(geom, pc_envelope(pa),10) --patches should be INSIDE bounds

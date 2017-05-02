@@ -113,5 +113,5 @@ app.get( '/', function( req, res ) {
 	res.send( 'Nothing to see here, move on!' );
 } );
 app.listen( 8080, function( ) {
-	console.log( 'BGT X3D service listening on port 8081' );
+	console.log( 'BGT X3D service listening on port 8080' );
 } );

@@ -5,7 +5,7 @@
  pointcloud_building AS (
   SELECT PC_FilterGreaterThan(
       PC_FilterEquals(
-        PC_FilterEquals(pa,'classification',1),
+        PC_FilterEquals(pa,'classification',2),
       'NumberOfReturns',1),
     'Intensity',150) pa  --take out trees with nreturns ands intensity
   FROM adam_pointcloud.patches, bounds

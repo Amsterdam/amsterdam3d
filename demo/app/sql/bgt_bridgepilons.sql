@@ -3,7 +3,7 @@
   SELECT ST_Segmentize(ST_MakeEnvelope(_west, _south, _east, _north, 28992),_segmentlength) geom
  ),
     pointcloud AS (
-      SELECT PC_FilterEquals(pa,'classification',26) pa --bridge points
+      SELECT PC_FilterEquals(pa,'classification',2) pa --bridge points
       FROM adam_pointcloud.patches, bounds
       WHERE ST_DWithin(geom, pc_envelope(pa),10)
     ),

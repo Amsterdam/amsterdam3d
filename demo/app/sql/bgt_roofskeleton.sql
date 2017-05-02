@@ -2,7 +2,7 @@ WITH bounds AS (
   SELECT ST_MakeEnvelope(_west, _south, _east, _north, 28992) geom
 ),
   pointcloud AS (
-          SELECT PC_FilterEquals(pa,'classification',6) pa
+          SELECT PC_FilterEquals(pa,'classification',2) pa
           FROM adam_pointcloud.patches, bounds
           WHERE ST_DWithin(geom, Geometry(pa),10) --patches should be INSIDE bounds
   ),
