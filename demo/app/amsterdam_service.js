@@ -18,11 +18,12 @@ var sets = {
 	terrain: { file : 'sql/bgt_terrain.sql',sql: ''},
 	roads: { file : 'sql/bgt_road.sql',sql: ''},
 	buildings: { file : 'sql/bgt_buildings.sql', sql : '' },
-	roofskeleton: { file : 'sql/bgt_roofskeleton.sql', sql : '' },
+	// roofskeleton: { file : 'sql/bgt_roofskeleton.sql', sql : '' },
+	treepoints: { file : 'sql/bgt_treepoints.sql', sql : '' },
 	// treepoints: { file : 'sql/ahn3_treepoints.sql', sql : '' },
-	// treepoints_ahn3: { file : 'sql/bgt_ahn3_treepoints.sql', sql : '' },
+	// treepoints: { file : 'sql/bgt_ahn3_treepoints.sql', sql : '' },
 	// treepoints_ahn2: { file : 'sql/bgt_ahn2_treepoints.sql', sql : '' },
-	groundpoints: { file: 'sql/bgt_groundpoints.sql', sql: '' },
+	// groundpoints: { file: 'sql/bgt_groundpoints.sql', sql: '' },
 	// lights: { file : 'sql/bgt_lights.sql', sql : '' },
 	// adam3dfied_BuildingPart: { file : 'sql/adam3dfied_BuildingPart.sql', sql : '' },
 	// adam3dfied_Waterdeel: { file : 'sql/adam3dfied_Waterdeel.sql', sql : '' },
@@ -102,10 +103,6 @@ app.get( '/bgt3d', function( req, res ) {
 				} );
 				res.set( "Content-Type", 'text/plain' );
 				res.send(resultstring);
-				/*
-				 res.set("Content-Type", 'text/javascript'); // i added this to avoid the "Resource interpreted as Script but transferred with MIME type text/html" message
-				 res.send(JSON.stringify({data: result.rows}));
-				 */
 				console.log( 'Sending results', result.rows.length );
 				client.end( );
 			} );
