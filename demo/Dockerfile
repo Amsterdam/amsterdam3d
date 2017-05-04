@@ -18,7 +18,8 @@ RUN git clone https://github.com/Geodan/x3d_services.git
 
 WORKDIR /services/x3d_services
 RUN npm install
-COPY app/amsterdam* /services/x3d_services/js/
+COPY app/amsterdam_service.js /services/x3d_services/js/
+COPY app/amsterdam_ahn3_service.js /services/x3d_services/js/
 
 RUN mkdir /app
 

@@ -18,8 +18,16 @@ services:
 
   3dfier:
     build: 3dfier
+    links:
+      - database:database
     volumes:
       - $PWD/output:/output
+
+  cesium:
+    build: viewer
+    ports:
+      - "80:80"
+    command: ["nginx", "-g", "daemon off;"]
 
   x3d-service-ahn3:
     build: demo
