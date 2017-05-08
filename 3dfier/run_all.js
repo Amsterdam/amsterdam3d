@@ -49,4 +49,7 @@ tool.splitTiles([xmin, ymin, xmax, ymax], tilesize)
 				});
 			}
 		}
-    );
+    )
+	.catch(e=>{
+		console.warn(e);
+	});
