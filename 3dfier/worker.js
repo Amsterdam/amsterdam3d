@@ -13,7 +13,7 @@ process.on('message', function(m) {
 			.then(d=>{
 		return tool.offsetObj({
 			infile: '/output/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '.obj',
-			outfile: '/outputa/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '_offset.obj',
+			outfile: '/output/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '_offset.obj',
 			offsetx: xmin,
 			offsety: ymin
 		})
