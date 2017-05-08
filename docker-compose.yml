@@ -54,6 +54,6 @@ services:
     ports:
       - "80:80"
     volumes:
-      - $PWD/output/models:/var/www/html/models
+      - $PWD/output:/var/www/html/output
       - $PWD/viewer/output/Build/Cesium:/var/www/html/cesium
     command: ["nginx", "-g", "daemon off;"]
