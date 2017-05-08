@@ -21,6 +21,7 @@ services:
     links:
       - database:database
     volumes:
+      - $PWD/viewer/output/Build/Cesium:/work/cesium
       - $PWD/3dfier/output:/output
 
   cesium:

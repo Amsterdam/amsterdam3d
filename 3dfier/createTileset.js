@@ -1,5 +1,5 @@
 import fs from "fs";
-import Cesium from "cesium";
+import Cesium from "/work/cesium/Cesium";
 import proj4 from "proj4";
 
 export default function(config) {
