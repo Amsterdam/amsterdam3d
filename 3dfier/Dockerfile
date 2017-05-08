@@ -145,7 +145,7 @@ WORKDIR /temp/
 RUN rm -rf /temp/3dfier
 
 # Prepare for piplinescripts
-RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+RUN wget -qO- https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get install -y nodejs
 
 ENV PATH="/work:${PATH}"
