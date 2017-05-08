@@ -9,7 +9,7 @@ RUN apt-get update \
 		git \
 		build-essential \
 		libsqlite3-dev \
-		libspatialite \
+		libspatialite7 \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
