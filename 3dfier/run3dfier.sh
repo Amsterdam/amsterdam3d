@@ -75,7 +75,7 @@ $OGR2OGR -nlt CONVERT_TO_LINEAR -where "eindregistratie is NULL" -spat $EXTENT -
 #echo "done"
 
 echo -n "Running 3dfier..."
-$THREEDFIER $THREEDCONF > $MODELDIR/$TILENAME.obj
+$THREEDFIER $THREEDCONF -o $MODELDIR/$TILENAME.obj
 #echo -n "Removing tmp files"
 #rm -r $WORKDIR
 echo "done"
