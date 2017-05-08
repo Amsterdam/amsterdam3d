@@ -3,7 +3,7 @@ MAINTAINER datapunt.ois@amsterdam.nl
 
 RUN apt-get update \
 	&& apt-get install -y \
-		postgresql-server-dev-9.6 \
+		postgresql-9.4 \
 		netcat \
 		wget \
 		git \
