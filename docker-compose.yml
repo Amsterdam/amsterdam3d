@@ -25,9 +25,9 @@ services:
 
   cesium:
     build: viewer
-    ports:
-      - "80:80"
-    command: ["nginx", "-g", "daemon off;"]
+    volumes:
+      - $PWD/viewer/output:/output
+    command: "cp -R /viewer/cesium/Build /output/"
 
   x3d-service-ahn3:
     build: demo
