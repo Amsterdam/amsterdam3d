@@ -138,6 +138,7 @@ RUN npm install
 RUN npm run build
 
 COPY pdal_options* /tiles/3dfier-tiles/conf/
+COPY worker.js /tiles/3dfier-tiles/src/worker.js
 COPY run* /tiles/3dfier-tiles/src/
 RUN chmod +x /tiles/3dfier-tiles/src/run3dfier.sh
 
