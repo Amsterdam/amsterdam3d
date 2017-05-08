@@ -10,6 +10,7 @@ RUN apt-get update \
 		subversion \
 		build-essential \
 		autoconf \
+		libtool \
 		libsqlite3-dev \
 		libspatialite7 \
  	&& apt-get clean \
