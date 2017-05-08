@@ -142,7 +142,5 @@ COPY worker.js /tiles/3dfier-tiles/src/worker.js
 COPY run* /tiles/3dfier-tiles/src/
 RUN chmod +x /tiles/3dfier-tiles/src/run3dfier.sh
 
-RUN mkdir /output
-
 WORKDIR /tiles/3dfier-tiles
 
