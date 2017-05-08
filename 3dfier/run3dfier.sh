@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PGPARAM="dbname=amsterdam3d user=postgres password="
+PGPARAM="host=database dbname=amsterdam3d user=postgres password="
 BASEDIR="/tiles/3dfier-tiles/"
 MODELDIR="/output/models"
 OGR2OGR="/usr/local/bin/ogr2ogr"
