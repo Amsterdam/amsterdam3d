@@ -1,4 +1,3 @@
-/*
 var
 		xmin = parseInt(process.argv[2]),
 		ymin = parseInt(process.argv[3]),
@@ -51,4 +50,3 @@ tool.splitTiles([xmin, ymin, xmax, ymax], tilesize)
 			}
 		}
     );
-*/
