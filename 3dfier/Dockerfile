@@ -7,6 +7,7 @@ RUN apt-get update \
 		netcat \
 		wget \
 		git \
+		subversion \
 		build-essential \
 		libsqlite3-dev \
 		libspatialite7 \
