@@ -145,12 +145,8 @@ WORKDIR /temp/
 RUN rm -rf /temp/3dfier
 
 # Prepare for piplinescripts
-RUN apt-get update \
-	&& apt-get install -y \
-		nodejs \
-		npm \
- 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+RUN apt-get install -y nodejs
 
 ENV PATH="/work:${PATH}"
 WORKDIR /work
