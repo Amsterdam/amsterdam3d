@@ -9,8 +9,30 @@ RUN apt-get update \
 		git \
 		build-essential \
 		libsqlite3-dev \
+		libspatialite \
  	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# build GEOS
+WORKDIR /temp
+RUN mkdir geos
+
+WORKDIR /temp/geos
+RUN svn checkout -q https://svn.osgeo.org/geos/tags/3.6.1/
+
+WORKDIR /temp/geos/3.6.1
+RUN ./autogen.sh
+
+WORKDIR /temp/geos/3.6.1
+RUN ./configure
+
+WORKDIR /temp/geos/3.6.1
+RUN make -j 4
+
+WORKDIR /temp/geos/3.6.1
+RUN make install
+
+RUN rm -rf /temp/geos
 
 # Install recent GDAL
 WORKDIR /temp
