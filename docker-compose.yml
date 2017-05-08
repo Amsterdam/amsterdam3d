@@ -39,12 +39,6 @@ services:
       - "8081:8081"
     command: [forever, amsterdam_ahn3_service.js]
 
-  x3d-viewer:
-    build: demo
-    ports:
-      - "80:80"
-    command: ["nginx", "-g", "daemon off;"]
-
   x3d-service-adam:
     build: demo
     volumes:
@@ -54,3 +48,12 @@ services:
     ports:
       - "8080:8080"
     command: [forever, amsterdam_service.js]
+
+  x3d-viewer:
+    build: demo
+    ports:
+      - "80:80"
+    volumes:
+      - $PWD/output/models:/var/www/html/models
+      - $PWD/viewer/output/Build/Cesium:/var/www/html/cesium
+    command: ["nginx", "-g", "daemon off;"]

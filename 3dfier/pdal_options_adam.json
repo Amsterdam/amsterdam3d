@@ -2,7 +2,7 @@
   "pipeline":[
     {
       "type":"readers.pgpointcloud",
-      "connection":"dbname='amsterdam3d' user='postgres'",
+      "connection":"dbname='ahn3' user='postgres'",
       "schema":"adam_pointcloud",
       "table":"patches",
       "column":"pa",
