@@ -1,3 +1,4 @@
+/*
 var
 		xmin = parseInt(process.argv[2]),
 		ymin = parseInt(process.argv[3]),
@@ -20,14 +21,14 @@ var cc = new computecluster({
 
 tool.splitTiles([xmin, ymin, xmax, ymax], tilesize)
 	.then(
-		tiles = > {
+		tiles => {
 			console.log(tiles);
 			return tool.createTileset({
 				tiles: tiles
 			})
 		})
 	.then(
-		tiles = > {
+		tiles => {
 			var toRun = tiles.length;
 			console.log('Exporting ' + tiles.length + ' tiles');
 
@@ -50,3 +51,4 @@ tool.splitTiles([xmin, ymin, xmax, ymax], tilesize)
 			}
 		}
     );
+*/
