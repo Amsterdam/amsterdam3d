@@ -159,7 +159,7 @@ WORKDIR /tiles/
 RUN git clone https://github.com/geodan/3dfier-tiles
 
 WORKDIR /tiles/3dfier-tiles
-RUN npm install
+RUN npm install -g
 RUN npm run build
 
 COPY pdal_options* /tiles/3dfier-tiles/conf/
