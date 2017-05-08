@@ -48,4 +48,6 @@ COPY adam_conf.js /app/x3d_viewer/conf/adam_conf.js
 
 RUN npm install -g forever
 
+COPY index.html /var/www/html/
+
 WORKDIR /services/x3d_services/js
