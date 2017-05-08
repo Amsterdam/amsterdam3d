@@ -1,11 +1,11 @@
 #!/bin/bash
 
-PGPARAM="dbname=amsterdam3d user=postgres password="
+PGPARAM="dbname=amsterdam3d user=postgres password= "
 BASEDIR="/tiles/3dfier-tiles/"
-MODELDIR="$BASEDIR/data/models"
+MODELDIR="/output/models"
 OGR2OGR="/usr/local/bin/ogr2ogr"
 PDAL="/usr/bin/pdal"
-PDALOPT="$BASEDIR/conf/pdal_options_adam.json"
+PDALOPT="$BASEDIR/conf/pdal_options_ahn3.json"
 THREEDFIER="/work/3dfier"
 THREEDCONF="$BASEDIR/conf/3dfier.yml"
 
