@@ -151,11 +151,20 @@ RUN apt-get install -y nodejs
 ENV PATH="/work:${PATH}"
 WORKDIR /work
 
+RUN mkdir /viewer
+WORKDIR /viewer
+RUN git clone https://github.com/AnalyticalGraphicsInc/cesium
+
+WORKDIR /viewer/cesium
+RUN git checkout 3d-tiles
+
+RUN npm install
+RUN npm run minifyRelease
+
 WORKDIR /tiles/
 RUN git clone https://github.com/geodan/3dfier-tiles
 
 WORKDIR /tiles/3dfier-tiles
-RUN npm install cesium
 RUN npm install
 
 COPY pdal_options* /tiles/3dfier-tiles/conf/
