@@ -2,7 +2,7 @@
 
 PGPARAM="host=database dbname=ahn3 user=postgres password="
 BASEDIR="/tiles/3dfier-tiles/"
-MODELDIR="/output/models"
+MODELDIR="$BASEDIR/data/models"
 OGR2OGR="/usr/local/bin/ogr2ogr"
 PDAL="/usr/bin/pdal"
 PDALOPT="$BASEDIR/conf/pdal_options_ahn3.json"

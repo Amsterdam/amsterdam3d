@@ -12,15 +12,15 @@ process.on('message', function(m) {
 	tool.export2obj({xmin: xmin, ymin: ymin, xmax: xmax, ymax: ymax})
 			.then(d=>{
 		return tool.offsetObj({
-			infile: '/output/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '.obj',
-			outfile: '/output/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '_offset.obj',
+			infile: './data/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '.obj',
+			outfile: './data/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '_offset.obj',
 			offsetx: xmin,
 			offsety: ymin
 		})
 	}).then(infile=>{
 		return tool.obj2gltf({
 			infile: infile,
-			outfile: '/output/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '.gltf',
+			outfile: './data/models/' + xmin + '-' + ymin + '-' + xmax + '-' + ymax + '.gltf',
 		});
 }).catch(e=>{
 		console.warn(e);

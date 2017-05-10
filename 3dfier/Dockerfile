@@ -169,6 +169,7 @@ RUN npm install
 
 COPY pdal_options* /tiles/3dfier-tiles/conf/
 COPY 3dfier.yml /tiles/3dfier-tiles/conf/
+COPY *.glsl /tiles/3dfier-tiles/conf/
 COPY worker.js /tiles/3dfier-tiles/src/worker.js
 COPY run* /tiles/3dfier-tiles/src/
 COPY createTileset.js /tiles/3dfier-tiles/src/

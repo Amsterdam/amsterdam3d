@@ -23,6 +23,7 @@ services:
     volumes:
       - $PWD/viewer/output/Build/Cesium:/work/cesium
       - $PWD/3dfier/output:/output
+    command: "cp /tiles/3dfier-tiles/conf/*.glsl /output/"
 
   cesium:
     build: viewer
