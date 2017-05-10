@@ -159,7 +159,7 @@ WORKDIR /viewer/cesium
 RUN git checkout 3d-tiles
 
 RUN npm install
-RUN npm run minifyRelease
+RUN npm run combineRelease
 
 WORKDIR /tiles/
 RUN git clone https://github.com/geodan/3dfier-tiles
